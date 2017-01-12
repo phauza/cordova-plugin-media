@@ -62,7 +62,7 @@ public class AudioHandler extends CordovaPlugin {
     private int origVolumeStream = -1;
     private CallbackContext messageChannel;
 
-    HashMap<String, int> streamTypes = new HashMap<String, int>();
+    HashMap<String, Integer> streamTypes = new HashMap<String, Integer>();
     static {
         streamTypes.put("STREAM_MASTER", AudioManager.STREAM_MASTER);
         streamTypes.put("STREAM_VOICE_CALL", AudioManager.STREAM_VOICE_CALL);
