@@ -62,17 +62,7 @@ public class AudioHandler extends CordovaPlugin {
     private int origVolumeStream = -1;
     private CallbackContext messageChannel;
 
-    HashMap<String, Integer> streamTypes = new HashMap<String, Integer>();
-    static {
-        streamTypes.put("STREAM_MASTER", AudioManager.STREAM_MASTER);
-        streamTypes.put("STREAM_VOICE_CALL", AudioManager.STREAM_VOICE_CALL);
-        streamTypes.put("STREAM_SYSTEM", AudioManager.STREAM_SYSTEM);
-        streamTypes.put("STREAM_RING", AudioManager.STREAM_RING);
-        streamTypes.put("STREAM_MUSIC", AudioManager.STREAM_MUSIC);
-        streamTypes.put("STREAM_ALARM", AudioManager.STREAM_ALARM);
-        streamTypes.put("STREAM_NOTIFICATION", AudioManager.STREAM_NOTIFICATION);
-        streamTypes.put("STREAM_DTMF", AudioManager.STREAM_DTMF);
-    }
+    HashMap<String, Integer> streamTypes;
 
     public static String [] permissions = { Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE};
     public static int RECORD_AUDIO = 0;
@@ -90,6 +80,16 @@ public class AudioHandler extends CordovaPlugin {
         this.players = new HashMap<String, AudioPlayer>();
         this.pausedForPhone = new ArrayList<AudioPlayer>();
         this.pausedForFocus = new ArrayList<AudioPlayer>();
+
+        this.streamTypes = new HashMap<String, Integer>();
+        this.streamTypes.put("STREAM_MASTER", AudioManager.STREAM_MASTER);
+        this.streamTypes.put("STREAM_VOICE_CALL", AudioManager.STREAM_VOICE_CALL);
+        this.streamTypes.put("STREAM_SYSTEM", AudioManager.STREAM_SYSTEM);
+        this.streamTypes.put("STREAM_RING", AudioManager.STREAM_RING);
+        this.streamTypes.put("STREAM_MUSIC", AudioManager.STREAM_MUSIC);
+        this.streamTypes.put("STREAM_ALARM", AudioManager.STREAM_ALARM);
+        this.streamTypes.put("STREAM_NOTIFICATION", AudioManager.STREAM_NOTIFICATION);
+        this.streamTypes.put("STREAM_DTMF", AudioManager.STREAM_DTMF);
     }
 
 
@@ -149,11 +149,11 @@ public class AudioHandler extends CordovaPlugin {
 
             String streamType = args.getString(2);
             int streamTypeValue = 3;
-            for (int i = 0 ; i < streamTypes.length ; i++)
+            for (int i = 0 ; i < this.streamTypes.length ; i++)
             {
-                if (streamTypes.get(streamType) != null)
+                if (this.streamTypes.get(streamType) != null)
                 {
-                    streamTypeValue = streamTypes.get(streamType);
+                    streamTypeValue = this.streamTypes.get(streamType);
                 }
             }
             this.startPlayingAudio(args.getString(0), FileHelper.stripFileProtocol(fileUriStr), streamTypeValue);
