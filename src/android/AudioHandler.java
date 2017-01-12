@@ -82,7 +82,6 @@ public class AudioHandler extends CordovaPlugin {
         this.pausedForFocus = new ArrayList<AudioPlayer>();
 
         this.streamTypes = new HashMap<String, Integer>();
-        this.streamTypes.put("STREAM_MASTER", AudioManager.STREAM_MASTER);
         this.streamTypes.put("STREAM_VOICE_CALL", AudioManager.STREAM_VOICE_CALL);
         this.streamTypes.put("STREAM_SYSTEM", AudioManager.STREAM_SYSTEM);
         this.streamTypes.put("STREAM_RING", AudioManager.STREAM_RING);
@@ -336,7 +335,7 @@ public class AudioHandler extends CordovaPlugin {
      * @param id				The id of the audio player
      * @param file				The name of the audio file.
      */
-    public void startPlayingAudio(String id, String file) {
+    public void startPlayingAudio(String id, String file, int streamType) {
         AudioPlayer audio = getOrCreatePlayer(id, file);
         audio.startPlaying(file);
         getAudioFocus();
