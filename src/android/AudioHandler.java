@@ -62,6 +62,17 @@ public class AudioHandler extends CordovaPlugin {
     private int origVolumeStream = -1;
     private CallbackContext messageChannel;
 
+    HashMap<String, int> streamTypes = new HashMap<String, int>();
+    static {
+        streamTypes.put("STREAM_MASTER", AudioManager.STREAM_MASTER);
+        streamTypes.put("STREAM_VOICE_CALL", AudioManager.STREAM_VOICE_CALL);
+        streamTypes.put("STREAM_SYSTEM", AudioManager.STREAM_SYSTEM);
+        streamTypes.put("STREAM_RING", AudioManager.STREAM_RING);
+        streamTypes.put("STREAM_MUSIC", AudioManager.STREAM_MUSIC);
+        streamTypes.put("STREAM_ALARM", AudioManager.STREAM_ALARM);
+        streamTypes.put("STREAM_NOTIFICATION", AudioManager.STREAM_NOTIFICATION);
+        streamTypes.put("STREAM_DTMF", AudioManager.STREAM_DTMF);
+    }
 
     public static String [] permissions = { Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE};
     public static int RECORD_AUDIO = 0;
@@ -135,7 +146,17 @@ public class AudioHandler extends CordovaPlugin {
             } catch (IllegalArgumentException e) {
                 fileUriStr = target;
             }
-            this.startPlayingAudio(args.getString(0), FileHelper.stripFileProtocol(fileUriStr));
+
+            String streamType = args.getString(2);
+            int streamTypeValue = 3;
+            for (int i = 0 ; i < streamTypes.length ; i++)
+            {
+                if (streamTypes.get(streamType) != null)
+                {
+                    streamTypeValue = streamTypes.get(streamType);
+                }
+            }
+            this.startPlayingAudio(args.getString(0), FileHelper.stripFileProtocol(fileUriStr), streamTypeValue);
         }
         else if (action.equals("seekToAudio")) {
             this.seekToAudio(args.getString(0), args.getInt(1));
