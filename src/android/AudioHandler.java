@@ -163,8 +163,7 @@ public class AudioHandler extends CordovaPlugin {
             }
 
             LOG.d(LOG_TAG, "---------------------------");
-            LOG.d(LOG_TAG, "--------------------------- streamTypeValue");
-            LOG.d(LOG_TAG, streamTypeValue);
+            LOG.d(LOG_TAG, "--------------------------- streamTypeValue", streamTypeValue);
 
             this.startPlayingAudio(args.getString(0), FileHelper.stripFileProtocol(fileUriStr), streamTypeValue);
         }
