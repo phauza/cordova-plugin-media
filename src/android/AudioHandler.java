@@ -276,8 +276,7 @@ public class AudioHandler extends CordovaPlugin {
                 for (AudioPlayer audio : this.pausedForPhone) {
                     audio.startPlaying(null, this.streamTypeValue);
                 }
-                this.
-                .clear();
+                this.pausedForPhone.clear();
             }
         }
         return null;
