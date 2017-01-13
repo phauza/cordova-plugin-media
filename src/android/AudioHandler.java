@@ -117,8 +117,8 @@ public class AudioHandler extends CordovaPlugin {
      */
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         Log.d(LOG_TAG, "--------------------------- execute");
-        Log.d(LOG_TAG, "--------------------------- action", action);
-        Log.d(LOG_TAG, "--------------------------- args", args.toString());
+        Log.d(LOG_TAG, "--------------------------- action:" + action);
+        Log.d(LOG_TAG, "--------------------------- args:" + args.toString());
 
         CordovaResourceApi resourceApi = webView.getResourceApi();
         PluginResult.Status status = PluginResult.Status.OK;
@@ -158,7 +158,7 @@ public class AudioHandler extends CordovaPlugin {
 
             String streamType = args.getString(2);
             Log.d(LOG_TAG, "---------------------------");
-            Log.d(LOG_TAG, "--------------------------- streamType", streamType);
+            Log.d(LOG_TAG, "--------------------------- streamType:" + streamType);
 
             int streamTypeValue = 3;
             for (int i = 0 ; i < this.streamTypes.size() ; i++)
@@ -170,7 +170,7 @@ public class AudioHandler extends CordovaPlugin {
             }
 
             Log.d(LOG_TAG, "---------------------------");
-            Log.d(LOG_TAG, "--------------------------- streamTypeValue", streamTypeValue.toString());
+            Log.d(LOG_TAG, "--------------------------- streamTypeValue:" + streamTypeValue.toString());
 
             this.startPlayingAudio(args.getString(0), FileHelper.stripFileProtocol(fileUriStr), streamTypeValue);
         }
