@@ -74,6 +74,8 @@ public class AudioHandler extends CordovaPlugin {
     private String recordId;
     private String fileUriStr;
 
+    private static final String LOG_TAG = "AudioHandler";
+
     /**
      * Constructor.
      */
