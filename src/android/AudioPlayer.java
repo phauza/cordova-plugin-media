@@ -632,7 +632,8 @@ public class AudioPlayer implements OnCompletionListener, OnPreparedListener, On
             this.player.setDataSource(file);
             this.player.setAudioStreamType(AudioManager.STREAM_ALARM);
             //if it's a streaming file, play mode is implied
-            this.setMode(MODE.PLAY);
+            //this.setMode(MODE.PLAY);
+            this.setMode(AudioManager.MODE_NORMAL);
             this.setState(STATE.MEDIA_STARTING);
             this.player.setOnPreparedListener(this);
             this.player.prepareAsync();
