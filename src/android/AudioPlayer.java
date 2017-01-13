@@ -295,7 +295,7 @@ public class AudioPlayer implements OnCompletionListener, OnPreparedListener, On
      *
      * @param file              The name of the audio file.
      */
-    public void startPlaying(String file, streamType) {
+    public void startPlaying(String file, int streamType) {
         if (this.readyPlayer(file) && this.player != null) {
             this.player.setAudioStreamType(streamType);
             this.player.start();
