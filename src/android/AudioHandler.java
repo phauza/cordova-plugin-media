@@ -74,6 +74,7 @@ public class AudioHandler extends CordovaPlugin {
 
     private String recordId;
     private String fileUriStr;
+    private int streamTypeValue = AudioManager.STREAM_MUSIC;
 
     private static final String LOG_TAG = "AudioHandler";
 
@@ -160,19 +161,18 @@ public class AudioHandler extends CordovaPlugin {
             Log.d(LOG_TAG, "---------------------------");
             Log.d(LOG_TAG, "--------------------------- streamType:" + streamType);
 
-            int streamTypeValue = 3;
             for (int i = 0 ; i < this.streamTypes.size() ; i++)
             {
                 if (this.streamTypes.get(streamType) != null)
                 {
-                    streamTypeValue = this.streamTypes.get(streamType);
+                    this.streamTypeValue = this.streamTypes.get(streamType);
                 }
             }
 
             Log.d(LOG_TAG, "---------------------------");
             Log.d(LOG_TAG, "--------------------------- streamTypeValue:" + Integer.toString(streamTypeValue));
 
-            this.startPlayingAudio(args.getString(0), FileHelper.stripFileProtocol(fileUriStr), streamTypeValue);
+            this.startPlayingAudio(args.getString(0), FileHelper.stripFileProtocol(fileUriStr), this.streamTypeValue);
         }
         else if (action.equals("seekToAudio")) {
             this.seekToAudio(args.getString(0), args.getInt(1));
@@ -274,9 +274,10 @@ public class AudioHandler extends CordovaPlugin {
             // If phone idle, then resume playing those players we paused
             else if ("idle".equals(data)) {
                 for (AudioPlayer audio : this.pausedForPhone) {
-                    audio.startPlaying(null, 3);
+                    audio.startPlaying(null, this.streamTypeValue);
                 }
-                this.pausedForPhone.clear();
+                this.
+                .clear();
             }
         }
         return null;
@@ -448,7 +449,7 @@ public class AudioHandler extends CordovaPlugin {
 
     public void resumeAllGainedFocus() {
         for (AudioPlayer audio : this.pausedForFocus) {
-            audio.startPlaying(null, 3);
+            audio.startPlaying(null, this.streamTypeValue);
         }
         this.pausedForFocus.clear();
     }
