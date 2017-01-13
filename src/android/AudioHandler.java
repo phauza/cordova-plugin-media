@@ -41,6 +41,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import org.apache.cordova.LOG;
 
 /**
  * This class called by CordovaActivity to play and record audio.
@@ -147,6 +148,10 @@ public class AudioHandler extends CordovaPlugin {
             }
 
             String streamType = args.getString(2);
+            LOG.d(LOG_TAG, "---------------------------");
+            LOG.d(LOG_TAG, "--------------------------- streamType");
+            LOG.d(LOG_TAG, streamType);
+
             int streamTypeValue = 3;
             for (int i = 0 ; i < this.streamTypes.size() ; i++)
             {
@@ -155,6 +160,11 @@ public class AudioHandler extends CordovaPlugin {
                     streamTypeValue = this.streamTypes.get(streamType);
                 }
             }
+
+            LOG.d(LOG_TAG, "---------------------------");
+            LOG.d(LOG_TAG, "--------------------------- streamTypeValue");
+            LOG.d(LOG_TAG, streamTypeValue);
+
             this.startPlayingAudio(args.getString(0), FileHelper.stripFileProtocol(fileUriStr), streamTypeValue);
         }
         else if (action.equals("seekToAudio")) {
