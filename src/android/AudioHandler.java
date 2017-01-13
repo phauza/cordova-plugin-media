@@ -274,7 +274,7 @@ public class AudioHandler extends CordovaPlugin {
             // If phone idle, then resume playing those players we paused
             else if ("idle".equals(data)) {
                 for (AudioPlayer audio : this.pausedForPhone) {
-                    audio.startPlaying(null);
+                    audio.startPlaying(null, 3);
                 }
                 this.pausedForPhone.clear();
             }
@@ -448,7 +448,7 @@ public class AudioHandler extends CordovaPlugin {
 
     public void resumeAllGainedFocus() {
         for (AudioPlayer audio : this.pausedForFocus) {
-            audio.startPlaying(null);
+            audio.startPlaying(null, 3);
         }
         this.pausedForFocus.clear();
     }
