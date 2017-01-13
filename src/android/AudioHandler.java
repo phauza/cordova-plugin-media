@@ -151,8 +151,7 @@ public class AudioHandler extends CordovaPlugin {
 
             String streamType = args.getString(2);
             LOG.d(LOG_TAG, "---------------------------");
-            LOG.d(LOG_TAG, "--------------------------- streamType");
-            LOG.d(LOG_TAG, streamType);
+            LOG.d(LOG_TAG, "--------------------------- streamType", streamType);
 
             int streamTypeValue = 3;
             for (int i = 0 ; i < this.streamTypes.size() ; i++)
