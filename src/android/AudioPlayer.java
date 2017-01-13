@@ -299,7 +299,15 @@ public class AudioPlayer implements OnCompletionListener, OnPreparedListener, On
         if (this.readyPlayer(file) && this.player != null) {
 //            this.player.setAudioStreamType(streamType);
             this.player.setAudioStreamType(AudioManager.STREAM_ALARM);
-            this.player.prepare();
+
+            try
+            {
+                this.player.prepare();
+            }
+            catch(Exception e)
+            {
+
+            }
             this.player.start();
             this.setState(STATE.MEDIA_RUNNING);
             this.seekOnPrepared = 0; //insures this is always reset
