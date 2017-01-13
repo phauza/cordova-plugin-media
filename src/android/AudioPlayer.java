@@ -563,7 +563,6 @@ public class AudioPlayer implements OnCompletionListener, OnPreparedListener, On
                 case MEDIA_NONE:
                     if (this.player == null) {
                         this.player = new MediaPlayer();
-                        this.player.setAudioStreamType(AudioManager.STREAM_ALARM);
                         this.player.setOnErrorListener(this);
                     }
                     try {
@@ -634,8 +633,8 @@ public class AudioPlayer implements OnCompletionListener, OnPreparedListener, On
             this.player.setDataSource(file);
             this.player.setAudioStreamType(AudioManager.STREAM_ALARM);
             //if it's a streaming file, play mode is implied
-            //this.setMode(MODE.PLAY);
-            //this.setState(STATE.MEDIA_STARTING);
+            this.setMode(MODE.PLAY);
+            this.setState(STATE.MEDIA_STARTING);
             this.player.setOnPreparedListener(this);
             this.player.prepareAsync();
         }
