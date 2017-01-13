@@ -115,6 +115,10 @@ public class AudioHandler extends CordovaPlugin {
      * @return 				A PluginResult object with a status and message.
      */
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
+        LOG.d(LOG_TAG, "--------------------------- execute");
+        LOG.d(LOG_TAG, "--------------------------- action", action);
+        LOG.d(LOG_TAG, "--------------------------- args", args);
+
         CordovaResourceApi resourceApi = webView.getResourceApi();
         PluginResult.Status status = PluginResult.Status.OK;
         String result = "";
@@ -350,7 +354,7 @@ public class AudioHandler extends CordovaPlugin {
      */
     public void startPlayingAudio(String id, String file, int streamType) {
         AudioPlayer audio = getOrCreatePlayer(id, file);
-        audio.startPlaying(file);
+        audio.startPlaying(file, streamType);
         getAudioFocus();
     }
 

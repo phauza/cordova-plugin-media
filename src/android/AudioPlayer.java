@@ -295,8 +295,9 @@ public class AudioPlayer implements OnCompletionListener, OnPreparedListener, On
      *
      * @param file              The name of the audio file.
      */
-    public void startPlaying(String file) {
+    public void startPlaying(String file, streamType) {
         if (this.readyPlayer(file) && this.player != null) {
+            this.player.setAudioStreamType(streamType);
             this.player.start();
             this.setState(STATE.MEDIA_RUNNING);
             this.seekOnPrepared = 0; //insures this is always reset
@@ -418,7 +419,7 @@ public class AudioPlayer implements OnCompletionListener, OnPreparedListener, On
         // If no player yet, then create one
         else {
             this.prepareOnly = true;
-            this.startPlaying(file);
+            this.startPlaying(file, 3);
 
             // This will only return value for local, since streaming
             // file hasn't been read yet.
@@ -629,7 +630,7 @@ public class AudioPlayer implements OnCompletionListener, OnPreparedListener, On
     private void loadAudioFile(String file) throws IllegalArgumentException, SecurityException, IllegalStateException, IOException {
         if (this.isStreaming(file)) {
             this.player.setDataSource(file);
-            this.player.setAudioStreamType(AudioManager.STREAM_NOTIFICATION);
+//            this.player.setAudioStreamType(AudioManager.STREAM_NOTIFICATION);
             //if it's a streaming file, play mode is implied
             this.setMode(MODE.PLAY);
             this.setState(STATE.MEDIA_STARTING);
