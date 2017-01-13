@@ -42,6 +42,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import org.apache.cordova.LOG;
+import android.util.Log;
 
 /**
  * This class called by CordovaActivity to play and record audio.
@@ -115,9 +116,9 @@ public class AudioHandler extends CordovaPlugin {
      * @return 				A PluginResult object with a status and message.
      */
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-        LOG.d(LOG_TAG, "--------------------------- execute");
-        LOG.d(LOG_TAG, "--------------------------- action", action);
-        LOG.d(LOG_TAG, "--------------------------- args", args);
+        Log.d(LOG_TAG, "--------------------------- execute");
+        Log.d(LOG_TAG, "--------------------------- action", action);
+        Log.d(LOG_TAG, "--------------------------- args", args.toString());
 
         CordovaResourceApi resourceApi = webView.getResourceApi();
         PluginResult.Status status = PluginResult.Status.OK;
@@ -144,8 +145,7 @@ public class AudioHandler extends CordovaPlugin {
             this.resumeRecordingAudio(args.getString(0));
         }
         else if (action.equals("startPlayingAudio")) {
-            LOG.d(LOG_TAG, "---------------------------");
-            LOG.d(LOG_TAG, "--------------------------- args", args);
+            Log.d(LOG_TAG, "---------------------------startPlayingAudio");
 
             String target = args.getString(1);
             String fileUriStr;
@@ -157,8 +157,8 @@ public class AudioHandler extends CordovaPlugin {
             }
 
             String streamType = args.getString(2);
-            LOG.d(LOG_TAG, "---------------------------");
-            LOG.d(LOG_TAG, "--------------------------- streamType", streamType);
+            Log.d(LOG_TAG, "---------------------------");
+            Log.d(LOG_TAG, "--------------------------- streamType", streamType);
 
             int streamTypeValue = 3;
             for (int i = 0 ; i < this.streamTypes.size() ; i++)
@@ -169,8 +169,8 @@ public class AudioHandler extends CordovaPlugin {
                 }
             }
 
-            LOG.d(LOG_TAG, "---------------------------");
-            LOG.d(LOG_TAG, "--------------------------- streamTypeValue", streamTypeValue);
+            Log.d(LOG_TAG, "---------------------------");
+            Log.d(LOG_TAG, "--------------------------- streamTypeValue", streamTypeValue.toString());
 
             this.startPlayingAudio(args.getString(0), FileHelper.stripFileProtocol(fileUriStr), streamTypeValue);
         }
