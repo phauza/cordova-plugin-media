@@ -140,6 +140,9 @@ public class AudioHandler extends CordovaPlugin {
             this.resumeRecordingAudio(args.getString(0));
         }
         else if (action.equals("startPlayingAudio")) {
+            LOG.d(LOG_TAG, "---------------------------");
+            LOG.d(LOG_TAG, "--------------------------- args", args);
+
             String target = args.getString(1);
             String fileUriStr;
             try {
