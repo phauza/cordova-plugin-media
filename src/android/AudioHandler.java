@@ -148,7 +148,7 @@ public class AudioHandler extends CordovaPlugin {
 
             String streamType = args.getString(2);
             int streamTypeValue = 3;
-            for (int i = 0 ; i < this.streamTypes.length ; i++)
+            for (int i = 0 ; i < this.streamTypes.size() ; i++)
             {
                 if (this.streamTypes.get(streamType) != null)
                 {
