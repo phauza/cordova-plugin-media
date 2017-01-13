@@ -563,6 +563,7 @@ public class AudioPlayer implements OnCompletionListener, OnPreparedListener, On
                 case MEDIA_NONE:
                     if (this.player == null) {
                         this.player = new MediaPlayer();
+                        this.player.setAudioStreamType(AudioManager.STREAM_ALARM);
                         this.player.setOnErrorListener(this);
                     }
                     try {
