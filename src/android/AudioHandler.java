@@ -117,9 +117,6 @@ public class AudioHandler extends CordovaPlugin {
      * @return 				A PluginResult object with a status and message.
      */
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-        Log.d(LOG_TAG, "--------------------------- execute");
-        Log.d(LOG_TAG, "--------------------------- action:" + action);
-        Log.d(LOG_TAG, "--------------------------- args:" + args.toString());
 
         CordovaResourceApi resourceApi = webView.getResourceApi();
         PluginResult.Status status = PluginResult.Status.OK;

@@ -297,7 +297,7 @@ public class AudioPlayer implements OnCompletionListener, OnPreparedListener, On
      *
      * @param file              The name of the audio file.
      */
-    public void startPlaying(String file, int streamType) {
+    public void startPlaying(String file, Integer streamType) {
         if (this.readyPlayer(file, streamType) && this.player != null) {
             this.player.start();
             this.setState(STATE.MEDIA_RUNNING);
@@ -420,7 +420,7 @@ public class AudioPlayer implements OnCompletionListener, OnPreparedListener, On
         // If no player yet, then create one
         else {
             this.prepareOnly = true;
-            this.startPlaying(file, 3);
+            this.startPlaying(file, null);
 
             // This will only return value for local, since streaming
             // file hasn't been read yet.
