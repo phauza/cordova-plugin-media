@@ -298,28 +298,10 @@ public class AudioPlayer implements OnCompletionListener, OnPreparedListener, On
      * @param file              The name of the audio file.
      */
     public void startPlaying(String file, int streamType) {
-
         if (this.readyPlayer(file, streamType) && this.player != null) {
-
-            Log.d(LOG_TAG, "---------------------------");
-            Log.d(LOG_TAG, "--------------------------- startPlaying start");
-
-            this.player.setAudioStreamType(AudioManager.STREAM_ALARM);
-
-            try
-            {
-                this.player.prepare();
-            }
-            catch(Exception e)
-            {
-                e.printStackTrace();
-            }
             this.player.start();
             this.setState(STATE.MEDIA_RUNNING);
             this.seekOnPrepared = 0; //insures this is always reset
-
-            Log.d(LOG_TAG, "---------------------------");
-            Log.d(LOG_TAG, "--------------------------- startPlaying stop");
         } else {
             this.prepareOnly = false;
         }
@@ -650,12 +632,11 @@ public class AudioPlayer implements OnCompletionListener, OnPreparedListener, On
     private void loadAudioFile(String file, Integer streamType) throws IllegalArgumentException, SecurityException, IllegalStateException, IOException
 {
         if (streamType != null) {
-            this.player.setAudioStreamType(AudioManager.STREAM_ALARM);
+            this.player.setAudioStreamType(streamType);
         }
 
         if (this.isStreaming(file)) {
             this.player.setDataSource(file);
-            // this.player.setAudioStreamType(AudioManager.STREAM_ALARM);
             //if it's a streaming file, play mode is implied
             this.setMode(MODE.PLAY);
             this.setState(STATE.MEDIA_STARTING);

@@ -146,8 +146,6 @@ public class AudioHandler extends CordovaPlugin {
             this.resumeRecordingAudio(args.getString(0));
         }
         else if (action.equals("startPlayingAudio")) {
-            Log.d(LOG_TAG, "---------------------------startPlayingAudio");
-
             String target = args.getString(1);
             String fileUriStr;
             try {
@@ -158,9 +156,6 @@ public class AudioHandler extends CordovaPlugin {
             }
 
             String streamType = args.getString(2);
-            Log.d(LOG_TAG, "---------------------------");
-            Log.d(LOG_TAG, "--------------------------- streamType:" + streamType);
-
             for (int i = 0 ; i < this.streamTypes.size() ; i++)
             {
                 if (this.streamTypes.get(streamType) != null)
@@ -168,9 +163,6 @@ public class AudioHandler extends CordovaPlugin {
                     this.streamTypeValue = this.streamTypes.get(streamType);
                 }
             }
-
-            Log.d(LOG_TAG, "---------------------------");
-            Log.d(LOG_TAG, "--------------------------- streamTypeValue:" + Integer.toString(streamTypeValue));
 
             this.startPlayingAudio(args.getString(0), FileHelper.stripFileProtocol(fileUriStr), this.streamTypeValue);
         }
