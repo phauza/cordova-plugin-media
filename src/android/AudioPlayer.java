@@ -39,6 +39,8 @@ import java.io.OutputStream;
 import java.io.IOException;
 import java.util.LinkedList;
 
+import android.util.Log;
+
 /**
  * This class implements the audio playback and recording capabilities used by Cordova.
  * It is called by the AudioHandler Cordova class.
@@ -298,6 +300,10 @@ public class AudioPlayer implements OnCompletionListener, OnPreparedListener, On
     public void startPlaying(String file, int streamType) {
         if (this.readyPlayer(file) && this.player != null) {
 //            this.player.setAudioStreamType(streamType);
+
+            Log.d(LOG_TAG, "---------------------------");
+            Log.d(LOG_TAG, "--------------------------- startPlaying start");
+
             this.player.setAudioStreamType(AudioManager.STREAM_ALARM);
 
             try
@@ -311,6 +317,9 @@ public class AudioPlayer implements OnCompletionListener, OnPreparedListener, On
             this.player.start();
             this.setState(STATE.MEDIA_RUNNING);
             this.seekOnPrepared = 0; //insures this is always reset
+
+            Log.d(LOG_TAG, "---------------------------");
+            Log.d(LOG_TAG, "--------------------------- startPlaying start");
         } else {
             this.prepareOnly = false;
         }
