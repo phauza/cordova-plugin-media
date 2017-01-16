@@ -302,20 +302,7 @@ public class AudioPlayer implements OnCompletionListener, OnPreparedListener, On
     Log.d(LOG_TAG, "---------------------------");
     Log.d(LOG_TAG, "---------------------------startPlaying file:" + file);
 
-    this.player.setAudioStreamType(4);
-    // this.player.setAudioStreamType(AudioManager.STREAM_ALARM);
-
-    try
-    {
-        this.player.prepare();
-    }
-    catch(Exception e)
-    {
-        e.printStackTrace();
-    }
-
-    Log.d(LOG_TAG, "---------------------------");
-    Log.d(LOG_TAG, "---------------------------startPlaying setAudioStreamType");
+    player.start()
 
         if (this.readyPlayer(file) && this.player != null) {
 //            this.player.setAudioStreamType(streamType);
@@ -595,6 +582,9 @@ public class AudioPlayer implements OnCompletionListener, OnPreparedListener, On
      * @return false if player not ready, reports if in wrong mode or state
      */
     private boolean readyPlayer(String file) {
+        Log.d(LOG_TAG, "---------------------------");
+        Log.d(LOG_TAG, "---------------------------readyPlayer this.state:" + Integer.toString(this.state));
+
         if (playMode()) {
             switch (this.state) {
                 case MEDIA_NONE:
@@ -666,9 +656,12 @@ public class AudioPlayer implements OnCompletionListener, OnPreparedListener, On
      * @throws IllegalArgumentException
      */
     private void loadAudioFile(String file) throws IllegalArgumentException, SecurityException, IllegalStateException, IOException {
+
+        this.player.setAudioStreamType(AudioManager.STREAM_ALARM);
+
         if (this.isStreaming(file)) {
             this.player.setDataSource(file);
-            this.player.setAudioStreamType(AudioManager.STREAM_ALARM);
+            // this.player.setAudioStreamType(AudioManager.STREAM_ALARM);
             //if it's a streaming file, play mode is implied
             this.setMode(MODE.PLAY);
             this.setState(STATE.MEDIA_STARTING);
