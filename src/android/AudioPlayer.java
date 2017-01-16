@@ -312,14 +312,14 @@ public class AudioPlayer implements OnCompletionListener, OnPreparedListener, On
             }
             catch(Exception e)
             {
-
+                e.printStackTrace();
             }
             this.player.start();
             this.setState(STATE.MEDIA_RUNNING);
             this.seekOnPrepared = 0; //insures this is always reset
 
             Log.d(LOG_TAG, "---------------------------");
-            Log.d(LOG_TAG, "--------------------------- startPlaying start");
+            Log.d(LOG_TAG, "--------------------------- startPlaying stop");
         } else {
             this.prepareOnly = false;
         }
