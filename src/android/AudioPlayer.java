@@ -581,11 +581,12 @@ public class AudioPlayer implements OnCompletionListener, OnPreparedListener, On
      */
     private boolean readyPlayer(String file) {
         Log.d(LOG_TAG, "---------------------------");
-        Log.d(LOG_TAG, "---------------------------readyPlayer this.state:" + Integer.toString(this.state));
+        Log.d(LOG_TAG, "---------------------------readyPlayer this.state:" + this.state);
 
         if (playMode()) {
             switch (this.state) {
                 case MEDIA_NONE:
+                    Log.d(LOG_TAG, "---------------------------MEDIA_NONE");
                     if (this.player == null) {
                         this.player = new MediaPlayer();
                         this.player.setOnErrorListener(this);
@@ -597,6 +598,7 @@ public class AudioPlayer implements OnCompletionListener, OnPreparedListener, On
                     }
                     return false;
                 case MEDIA_LOADING:
+                    Log.d(LOG_TAG, "---------------------------MEDIA_LOADING");
                     //cordova js is not aware of MEDIA_LOADING, so we send MEDIA_STARTING instead
                     LOG.d(LOG_TAG, "AudioPlayer Loading: startPlaying() called during media preparation: " + STATE.MEDIA_STARTING.ordinal());
                     this.prepareOnly = false;
@@ -606,6 +608,7 @@ public class AudioPlayer implements OnCompletionListener, OnPreparedListener, On
                 case MEDIA_PAUSED:
                     return true;
                 case MEDIA_STOPPED:
+                    Log.d(LOG_TAG, "---------------------------MEDIA_STOPPED");
                     //if we are readying the same file
                     if (this.audioFile.compareTo(file) == 0) {
                         //maybe it was recording?
