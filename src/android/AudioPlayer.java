@@ -302,6 +302,20 @@ public class AudioPlayer implements OnCompletionListener, OnPreparedListener, On
     Log.d(LOG_TAG, "---------------------------");
     Log.d(LOG_TAG, "---------------------------startPlaying file:" + file);
 
+    this.player.setAudioStreamType(AudioManager.STREAM_ALARM);
+
+    try
+    {
+        this.player.prepare();
+    }
+    catch(Exception e)
+    {
+        e.printStackTrace();
+    }
+
+    Log.d(LOG_TAG, "---------------------------");
+    Log.d(LOG_TAG, "---------------------------startPlaying setAudioStreamType");
+
         if (this.readyPlayer(file) && this.player != null) {
 //            this.player.setAudioStreamType(streamType);
 
