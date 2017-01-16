@@ -299,11 +299,7 @@ public class AudioPlayer implements OnCompletionListener, OnPreparedListener, On
      */
     public void startPlaying(String file, int streamType) {
 
-    Log.d(LOG_TAG, "---------------------------");
-    Log.d(LOG_TAG, "---------------------------startPlaying file:" + file);
-
-        if (this.readyPlayer(file) && this.player != null) {
-//            this.player.setAudioStreamType(streamType);
+        if (this.readyPlayer(file, streamType) && this.player != null) {
 
             Log.d(LOG_TAG, "---------------------------");
             Log.d(LOG_TAG, "--------------------------- startPlaying start");
@@ -333,7 +329,7 @@ public class AudioPlayer implements OnCompletionListener, OnPreparedListener, On
      * Seek or jump to a new time in the track.
      */
     public void seekToPlaying(int milliseconds) {
-        if (this.readyPlayer(this.audioFile)) {
+        if (this.readyPlayer(this.audioFile, null)) {
             if (milliseconds > 0) {
                 this.player.seekTo(milliseconds);
             }
@@ -579,26 +575,22 @@ public class AudioPlayer implements OnCompletionListener, OnPreparedListener, On
      * @param file the file to play
      * @return false if player not ready, reports if in wrong mode or state
      */
-    private boolean readyPlayer(String file) {
-        Log.d(LOG_TAG, "---------------------------");
-        Log.d(LOG_TAG, "---------------------------readyPlayer this.state:" + this.state);
+    private boolean readyPlayer(String file, Integer streamType) {
 
         if (playMode()) {
             switch (this.state) {
                 case MEDIA_NONE:
-                    Log.d(LOG_TAG, "---------------------------MEDIA_NONE");
                     if (this.player == null) {
                         this.player = new MediaPlayer();
                         this.player.setOnErrorListener(this);
                     }
                     try {
-                        this.loadAudioFile(file);
+                        this.loadAudioFile(file, streamType);
                     } catch (Exception e) {
                         sendErrorStatus(MEDIA_ERR_ABORTED);
                     }
                     return false;
                 case MEDIA_LOADING:
-                    Log.d(LOG_TAG, "---------------------------MEDIA_LOADING");
                     //cordova js is not aware of MEDIA_LOADING, so we send MEDIA_STARTING instead
                     LOG.d(LOG_TAG, "AudioPlayer Loading: startPlaying() called during media preparation: " + STATE.MEDIA_STARTING.ordinal());
                     this.prepareOnly = false;
@@ -608,7 +600,6 @@ public class AudioPlayer implements OnCompletionListener, OnPreparedListener, On
                 case MEDIA_PAUSED:
                     return true;
                 case MEDIA_STOPPED:
-                    Log.d(LOG_TAG, "---------------------------MEDIA_STOPPED");
                     //if we are readying the same file
                     if (this.audioFile.compareTo(file) == 0) {
                         //maybe it was recording?
@@ -618,7 +609,7 @@ public class AudioPlayer implements OnCompletionListener, OnPreparedListener, On
                             this.prepareOnly = false;
 
                             try {
-                                this.loadAudioFile(file);
+                                this.loadAudioFile(file, streamType);
                             } catch (Exception e) {
                                 sendErrorStatus(MEDIA_ERR_ABORTED);
                             }
@@ -634,7 +625,7 @@ public class AudioPlayer implements OnCompletionListener, OnPreparedListener, On
                         //reset the player
                         this.player.reset();
                         try {
-                            this.loadAudioFile(file);
+                            this.loadAudioFile(file, streamType);
                         } catch (Exception e) {
                             sendErrorStatus(MEDIA_ERR_ABORTED);
                         }
@@ -656,9 +647,11 @@ public class AudioPlayer implements OnCompletionListener, OnPreparedListener, On
      * @throws SecurityException
      * @throws IllegalArgumentException
      */
-    private void loadAudioFile(String file) throws IllegalArgumentException, SecurityException, IllegalStateException, IOException {
-
-        this.player.setAudioStreamType(AudioManager.STREAM_ALARM);
+    private void loadAudioFile(String file, Integer streamType) throws IllegalArgumentException, SecurityException, IllegalStateException, IOException
+{
+        if (streamType != null) {
+            this.player.setAudioStreamType(AudioManager.STREAM_ALARM);
+        }
 
         if (this.isStreaming(file)) {
             this.player.setDataSource(file);
