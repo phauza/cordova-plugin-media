@@ -154,7 +154,7 @@ public class AudioHandler extends CordovaPlugin {
             }
 
             String streamType = args.getString(2);
-            LOG.e(TAG4," Stream using to play audio in global function: " + streamType);
+            LOG.i(TAG4," Stream using to play audio in global function: " + streamType);
             for (int i = 0 ; i < this.streamTypes.size() ; i++)
             {
                 if (this.streamTypes.get(streamType) != null)
@@ -517,7 +517,7 @@ public class AudioHandler extends CordovaPlugin {
 
     private void onFirstPlayerCreated() {
         origVolumeStream = cordova.getActivity().getVolumeControlStream();
-        LOG.e(TAG4," Stream using to play audio in function onFirstPlayerCreated: " + this.streamTypeValue.toString());
+        LOG.i(TAG4," Stream using to play audio in function onFirstPlayerCreated: " + Integer.toString(this.streamTypeValue);
         cordova.getActivity().setVolumeControlStream(this.streamTypeValue);
     }
 
