@@ -515,7 +515,7 @@ public class AudioHandler extends CordovaPlugin {
 
     private void onFirstPlayerCreated() {
         origVolumeStream = cordova.getActivity().getVolumeControlStream();
-        cordova.getActivity().setVolumeControlStream(AudioManager.STREAM_MUSIC);
+        cordova.getActivity().setVolumeControlStream(AudioManager.STREAM_ALARM);
     }
 
     private void onLastPlayerReleased() {
