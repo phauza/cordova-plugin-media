@@ -87,8 +87,6 @@ public class AudioHandler extends CordovaPlugin {
         this.pausedForPhone = new ArrayList<AudioPlayer>();
         this.pausedForFocus = new ArrayList<AudioPlayer>();
 
-        LOG.i(TAG4,"Constructor...");
-
         this.streamTypes = new HashMap<String, Integer>();
         this.streamTypes.put("STREAM_VOICE_CALL", AudioManager.STREAM_VOICE_CALL);
         this.streamTypes.put("STREAM_SYSTEM", AudioManager.STREAM_SYSTEM);
@@ -125,8 +123,6 @@ public class AudioHandler extends CordovaPlugin {
         PluginResult.Status status = PluginResult.Status.OK;
         String result = "";
 
-        LOG.i(TAG4,"Execute... with action: " + action);
-
         if (action.equals("startRecordingAudio")) {
             recordId = args.getString(0);
             String target = args.getString(1);
@@ -148,7 +144,6 @@ public class AudioHandler extends CordovaPlugin {
             this.resumeRecordingAudio(args.getString(0));
         }
         else if (action.equals("startPlayingAudio")) {
-            LOG.i(TAG4,"StartPlayingAudio...");
             String target = args.getString(1);
             String fileUriStr;
             try {
