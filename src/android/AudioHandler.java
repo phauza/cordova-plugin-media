@@ -58,6 +58,7 @@ import android.util.Log;
 public class AudioHandler extends CordovaPlugin {
 
     public static String TAG = "AudioHandler";
+    public static String TAG4 = "AudioSteamChanger";
     HashMap<String, AudioPlayer> players;  // Audio player object
     ArrayList<AudioPlayer> pausedForPhone; // Audio players that were paused when phone call came in
     ArrayList<AudioPlayer> pausedForFocus; // Audio players that were paused when focus was lost
@@ -153,6 +154,7 @@ public class AudioHandler extends CordovaPlugin {
             }
 
             String streamType = args.getString(2);
+            LOG.e(TAG4," Stream using to play audio in global function: " + streamType);
             for (int i = 0 ; i < this.streamTypes.size() ; i++)
             {
                 if (this.streamTypes.get(streamType) != null)
@@ -515,7 +517,8 @@ public class AudioHandler extends CordovaPlugin {
 
     private void onFirstPlayerCreated() {
         origVolumeStream = cordova.getActivity().getVolumeControlStream();
-        cordova.getActivity().setVolumeControlStream(AudioManager.STREAM_ALARM);
+        LOG.e(TAG4," Stream using to play audio in function onFirstPlayerCreated: " + this.streamTypeValue.toString());
+        cordova.getActivity().setVolumeControlStream(this.streamTypeValue);
     }
 
     private void onLastPlayerReleased() {
