@@ -517,7 +517,7 @@ public class AudioHandler extends CordovaPlugin {
 
     private void onFirstPlayerCreated() {
         origVolumeStream = cordova.getActivity().getVolumeControlStream();
-        LOG.i(TAG4," Stream using to play audio in function onFirstPlayerCreated: " + Integer.toString(this.streamTypeValue);
+        LOG.i(TAG4," Stream using to play audio in function onFirstPlayerCreated: " + Integer.toString(this.streamTypeValue));
         cordova.getActivity().setVolumeControlStream(this.streamTypeValue);
     }
 
