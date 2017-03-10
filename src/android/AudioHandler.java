@@ -75,7 +75,7 @@ public class AudioHandler extends CordovaPlugin {
 
     private String recordId;
     private String fileUriStr;
-    private int streamTypeValue = AudioManager.STREAM_MUSIC;
+    private int streamTypeValue = AudioManager.STREAM_NOTIFICATION;
 
     private static final String LOG_TAG = "AudioHandler";
 
@@ -469,7 +469,7 @@ public class AudioHandler extends CordovaPlugin {
 
         AudioManager am = (AudioManager) this.cordova.getActivity().getSystemService(Context.AUDIO_SERVICE);
         int result = am.requestAudioFocus(focusChangeListener,
-                                          AudioManager.STREAM_MUSIC,
+                                          AudioManager.STREAM_NOTIFICATION,
                                           AudioManager.AUDIOFOCUS_GAIN);
 
         if (result != AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
